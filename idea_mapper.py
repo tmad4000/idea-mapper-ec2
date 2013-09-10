@@ -54,14 +54,6 @@ def getRelatedIdeas(qidea):
 
 	return sorted(relatedness,key=lambda idea_entry:-idea_entry[1])[0:20]
 
-from flask import Flask, request
-import json
-app = Flask(__name__)
-
-@app.route("/")
-def hello():
-    print "in the route"
-    return json.dumps(getRelatedIdeas(request.args.get("query")))
 
 def how_related_are_concept_lists(concept_list1, concept_list2):
 	"""returns numerical relationship level 0 and up"""
@@ -126,6 +118,15 @@ def get_idea_entries():
 def printRelatedIdeas(qidea):
 	for i,s in getRelatedIdeas(qidea):
 		print i[0:60],s
+
+from flask import Flask, request
+import json
+app = Flask(__name__)
+
+@app.route("/")
+def hello():
+    print "in the route"
+    return json.dumps(getRelatedIdeas(request.args.get("query")))
 
 if __name__ == '__main__':
 	print 'start'
