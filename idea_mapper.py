@@ -130,7 +130,7 @@ def printRelatedIdeas(qidea):
 if __name__ == '__main__':
 	print 'start'
 	print getRelatedIdeas("food")
-	app.run()
+	app.run(host='0.0.0.0')
 	#print getRelatedIdeas('eeg scrolling')
 	#printRelatedIdeas('eeg scrolling')
 
