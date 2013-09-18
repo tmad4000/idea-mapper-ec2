@@ -119,29 +119,3 @@ def printRelatedIdeas(qidea):
 	for i,s in getRelatedIdeas(qidea):
 		print i[0:60],s
 
-from flask import Flask, request
-import json
-app = Flask(__name__)
-
-@app.route("/")
-def hello():
-    print "in the route"
-    return json.dumps(getRelatedIdeas(request.args.get("query")))
-
-if __name__ == '__main__':
-	print 'start'
-	print getRelatedIdeas("food")
-	app.run(host='0.0.0.0')
-	#print getRelatedIdeas('eeg scrolling')
-	#printRelatedIdeas('eeg scrolling')
-
-
-
-
-
-
-
-
-
-
-
