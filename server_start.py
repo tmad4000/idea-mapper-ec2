@@ -23,21 +23,33 @@ def find_related():
 
 
 @app.route("/api")
-def add():
+def api():
     request = request.args.to_dict()
     if not request['type']:
         abort(400)
-    if request['type'] == u'add':
-        pass
-        #peform add logic
+    if request['type'] == u'create':
+        #hack
+        if not request['data']:
+            print "the world is exploding"
+        print 'create', request['data']
+        return add_idea(json.loads(request['data']))
+    if request['type'] == u'read':
+        #hack
+        if not request['data']:
+            print "the world is exploding"
+        return json.dumps(list_ideas())
     elif request['type'] == u'delete':
-        pass
+        #hack
+        if not request['data']:
+            print "the world is exploding"
+        #TODO
         #perform delete logic
     elif request['type'] == u'update':
-        pass
+        #hack
+        if not request['data']:
+            print "the world is exploding"
+        #TODO
         #perform update logic
-    #return db_inf.add_idea()
-    #return add_idea(request.args.get("query")))
 
 
 if __name__ == '__main__':
