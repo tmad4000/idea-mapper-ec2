@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, abort
 from mongokit import Connection, Document
 
 import json
@@ -13,12 +13,10 @@ app = Flask(__name__)
 @app.route("/")
 def find_related():
     q=request.args.get("query")
-    
     if q==None:
         q=''
 
     print "find related to: '" + q +"'"
-    
     return json.dumps(getRelatedIdeas(q)) #comment out for speed of testing
     return 'eue'
 
@@ -26,9 +24,18 @@ def find_related():
 
 @app.route("/api")
 def add():
-    print request.args.to_dict()
-    print "adding idea"
-    return json.dumps((request.args.to_dict()))
+    request = request.args.to_dict()
+    if not request['type']:
+        abort(400)
+    if request['type'] == u'add':
+        pass
+        #peform add logic
+    elif request['type'] == u'delete':
+        pass
+        #perform delete logic
+    elif request['type'] == u'update':
+        pass
+        #perform update logic
     #return db_inf.add_idea()
     #return add_idea(request.args.get("query")))
 
