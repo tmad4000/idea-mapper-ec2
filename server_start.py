@@ -12,21 +12,21 @@ app = Flask(__name__)
 
 @app.route("/")
 def find_related():
-	q=request.args.get("query")
-	
-	if q==None:
-		q=''
+    q=request.args.get("query")
+    
+    if q==None:
+        q=''
 
-	print "find related to: '" + q +"'"
-	
-	return json.dumps(getRelatedIdeas(q)) #comment out for speed of testing
-	return 'eue'
+    print "find related to: '" + q +"'"
+    
+    return json.dumps(getRelatedIdeas(q)) #comment out for speed of testing
+    return 'eue'
 
 
 
 @app.route("/api")
 def add():
-	print request.args.to_dict()
+    print request.args.to_dict()
     print "adding idea"
     return json.dumps((request.args.to_dict()))
     #return db_inf.add_idea()
@@ -34,9 +34,9 @@ def add():
 
 
 if __name__ == '__main__':
-	print 'start'
+    print 'start'
 
-	#print getRelatedIdeas("food")
-	app.run(debug=True, host='0.0.0.0')
-	#print getRelatedIdeas('eeg scrolling')
-	#printRelatedIdeas('eeg scrolling')
+    #print getRelatedIdeas("food")
+    app.run(debug=True, host='0.0.0.0')
+    #print getRelatedIdeas('eeg scrolling')
+    #printRelatedIdeas('eeg scrolling')
