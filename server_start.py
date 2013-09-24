@@ -24,8 +24,9 @@ def find_related():
 
 
 
-@app.route("/add")
+@app.route("/api")
 def add():
+	print request.args.to_dict()
     print "adding idea"
     return json.dumps((request.args.to_dict()))
     #return db_inf.add_idea()
@@ -35,7 +36,7 @@ def add():
 if __name__ == '__main__':
 	print 'start'
 
-#	print getRelatedIdeas("food")
+	#print getRelatedIdeas("food")
 	app.run(debug=True, host='0.0.0.0')
 	#print getRelatedIdeas('eeg scrolling')
 	#printRelatedIdeas('eeg scrolling')
