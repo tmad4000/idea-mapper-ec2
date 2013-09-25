@@ -10,44 +10,36 @@ import db_inf
 
 app = Flask(__name__)
 
-@app.route("/")
+@app.route('/')
 def find_related():
-    q=request.args.get("query")
+    q=request.args.get('query')
     if q==None:
         q=''
 
-    print "find related to: '" + q +"'"
+    print 'find related to: '' + q +'''
     return json.dumps(getRelatedIdeas(q)) #comment out for speed of testing
     return 'eue'
 
 
 
-@app.route("/api")
+@app.route('/api')
 def api():
-    request = request.args.to_dict()
-    if not request['type']:
-        abort(400)
-    if request['type'] == u'create':
-        #hack
-        if not request['data']:
-            print "the world is exploding"
-        print 'create', request['data']
-        return add_idea(json.loads(request['data']))
-    if request['type'] == u'read':
-        #hack
-        if not request['data']:
-            print "the world is exploding"
+    request_type = request.args.get('type')
+    request_data = request.args.get('data')
+    if not request_type: abort(400)
+    if request_type == u'create': #hack
+        if not request_data: print 'the world is exploding'
+        print 'create', request_data
+        return add_idea(json.loads(request_data))
+    if request_type == u'read': #hack
+        if not request_data: print 'the world is exploding'
         return json.dumps(list_ideas())
-    elif request['type'] == u'delete':
-        #hack
-        if not request['data']:
-            print "the world is exploding"
+    elif request_type == u'delete': #hack
+        if not request_data: print 'the world is exploding'
         #TODO
         #perform delete logic
-    elif request['type'] == u'update':
-        #hack
-        if not request['data']:
-            print "the world is exploding"
+    elif request_type == u'update': #hack
+        if not request_data: print 'the world is exploding'
         #TODO
         #perform update logic
 
@@ -55,7 +47,7 @@ def api():
 if __name__ == '__main__':
     print 'start'
 
-    #print getRelatedIdeas("food")
+    #print getRelatedIdeas('food')
     app.run(debug=True, host='0.0.0.0')
     #print getRelatedIdeas('eeg scrolling')
     #printRelatedIdeas('eeg scrolling')
