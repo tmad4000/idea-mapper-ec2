@@ -55,7 +55,7 @@ def ui():
     print 'find related to: '' + q +'''    
     lRay=getRelatedIdeas(q)
 
-    l = ['<li>'+i[0]+'<div style="float:right">'+str(i[1])+'</div></li>\n' for i in lRay]
+    l = ['<li>'+i[0]+'</li>\n' for i in lRay]
 
     return b + '\n<ul>'+''.join(l)+'</ul>'
 
