@@ -45,17 +45,17 @@ def api():
 
 @app.route('/ui')
 def ui():
-    b='<h1>Has your idea been done before?</h1><br><form method="get"><input type="text" name="query"><input type="submit"></form><br>'
-
     q=request.args.get('query')
     if q==None:
         q=''
 
+
+    b='<h1>Has your idea been done before?</h1><br><form method="get"><input type="text" name="query" value="'+q+'"><input type="submit"></form><br>'
+
     print 'find related to: '' + q +'''    
     lRay=getRelatedIdeas(q)
 
-    l = ['<li>'+i[0]+'</li>\n' for i in lRay]
-
+    l = ['<li>'+i[0]+'<div style="float:right">'+i[1]+'</div></li>\n' for i in lRay]
 
     return b + '\n<ul>'+''.join(l)+'</ul>'
 
