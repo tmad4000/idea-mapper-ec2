@@ -43,6 +43,21 @@ def api():
         #TODO
         #perform update logic
 
+@app.route('/ui')
+def ui():
+    b='<h1>Has your idea been done before?</h1><br><form method="get"><input type="text" name="query"><input type="submit"></form><br>'
+
+    q=request.args.get('query')
+    if q==None:
+        q=''
+
+    print 'find related to: '' + q +'''    
+    lRay=getRelatedIdeas(q)
+
+    l = ['<li>'+i+'</li>\n' for i in lRay]
+
+
+    return b + '\n<ul>'+l+'</ul>'
 
 if __name__ == '__main__':
     print 'start'
