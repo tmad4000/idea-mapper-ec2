@@ -57,7 +57,7 @@ def ui():
     l = ['<li>'+i[0]+'</li>\n' for i in lRay]
 
 
-    return b + '\n<ul>'+l+'</ul>'
+    return b + '\n<ul>'+''.join(l)+'</ul>'
 
 if __name__ == '__main__':
     print 'start'
