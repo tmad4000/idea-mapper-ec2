@@ -52,7 +52,7 @@ def getRelatedIdeas(qidea):
 		(id, idea, concept_list) = idea_entry
 		relatedness.append((idea, how_related_are_concept_lists(qconcept_list, concept_list)))
 
-	return sorted(relatedness,key=lambda idea_entry:-idea_entry[1])[0:20]
+	return sorted(relatedness,key=lambda idea_entry:-idea_entry[1][0])[0:20]
 
 
 def how_related_are_concept_lists(concept_list1, concept_list2):
@@ -92,8 +92,8 @@ def how_related_are_concept_lists(concept_list1, concept_list2):
 				maxVs.pop()
 				maxCs.pop()
 
-	#print maxCs
-	return sum(maxVs)
+	
+	return (sum(maxVs) , maxCs)
 	
 
 	"""

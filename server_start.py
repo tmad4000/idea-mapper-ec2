@@ -7,6 +7,10 @@ import json
 from idea_mapper import * #comment out for speed of testing
 import db_inf 
 
+import sys
+reload(sys)
+sys.setdefaultencoding("utf-8")
+
 
 app = Flask(__name__)
 
@@ -50,12 +54,12 @@ def ui():
         q=''
 
 
-    b='<h1>Has your idea been done before?</h1><br><form method="get"><input type="text" name="query" value="'+q+'"><input type="submit"></form><br>'
+    b='<h1>Has your idea been done before?</h1><br><form method="get"><input type="text" name="query" value="'+q+'" style="width:400px"><input type="submit"></form><br>'
 
     print 'find related to: '' + q +'''    
     lRay=getRelatedIdeas(q)
 
-    l = ['<li>'+i[0]+'</li>\n' for i in lRay]
+    l = ['<li><div style="">'+i[0]+' <div style="color:orange">' +str(i[1])+'</div></li>\n' for i in lRay]
 
     return b + '\n<ul>'+''.join(l)+'</ul>'
 
