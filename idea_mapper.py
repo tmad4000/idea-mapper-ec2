@@ -10,7 +10,7 @@ WorldThroughYourEyes -- What if you could make an app for Google Glasses or simi
 InstaBoxSite: platform to build: generalized, easy to modify "suggestion box" framework anyone can use to quickly buildp a website off that mold.  All of following sites and countless more are based on fundamentally the same idea of a “comments box: isawyou stackoverflow forums reddit fml formspring ideaoverflow.tk / hackathonprojects.tk suggestion box/politicalprogressbar ifiwereanmitstudent.tk tumblr twitter facebook wall
 In parallel, I am able to protoype many of the websites I build these days with what is basically a google doc. Why not build a google doc with slightly more functionality that truly allows me to prototype these tools? Check out http://mitdocs.tk/ to see the potential of this. Relatedly, way for people to make a homepage as easily as they can make a google doc -- consider http://adamchu.tk/, and http://minimalisthomepages.tk/  ~jcole@mit.edu
 """
-from d4d import d4d
+#from d4d import d4d
 import mock_db 
 import math
 
@@ -18,12 +18,12 @@ def sigmoid(x):
   return 1 / (1 + math.exp(-x))
 
 def extract_concepts(idea):
-	return d4d.en_nl.extract_concepts(idea)
+	return idea.split() #d4d.en_nl.extract_concepts(idea)
 
 def how_related_are(concept1, concept2):
 	#print concept1, concept2
 	try:
-		return d4d.d4d.c4.how_related_are(concept1, concept2)
+		return 0.5 #d4d.d4d.c4.how_related_are(concept1, concept2)
 	except KeyError: # key does not exist
 		return 0
 
@@ -86,7 +86,7 @@ def how_related_are_concept_lists(concept_list1, concept_list2):
 	for c1 in concept_list1:
 		for c2 in concept_list2:
 			r=how_related_are(c1, c2)
-			if r>maxVs[0]:
+			if r>=maxVs[0]:
 				maxVs.insert(0,r)
 				maxCs.insert(0,(c1,c2))
 				maxVs.pop()

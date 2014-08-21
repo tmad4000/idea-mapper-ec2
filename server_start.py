@@ -1,6 +1,7 @@
 from flask import Flask, request, abort
 from mongokit import Connection, Document
 
+import urllib
 import json
 
 
@@ -63,10 +64,26 @@ def ui():
 
     return b + '\n<ul>'+''.join(l)+'</ul>'
 
+# add ability to confirm/deny connections and add new ideas
+@app.route('/ui2')
+def ui2():
+    q=request.args.get('query')
+    if q==None:
+        q=''
+
+    b='<h1>Has your idea been done before?</h1><br><form method="get"><input type="text" name="query" value="'+q+'" style="width:400px"><input type="submit"></form><br>'
+
+    print 'find related to: '' + q +'''    
+    lRay=getRelatedIdeas(q)
+    
+    l = ['<li><div style=""><a href="?'+urllib.urlencode({'query' : i[0]})+'">'+i[0]+' </a><div style="color:orange">' +str(i[1])+'</div></li>\n' for i in lRay]
+
+    return b + '\n<ul>'+''.join(l)+'</ul>'
+
 if __name__ == '__main__':
     print 'start'
 
     #print getRelatedIdeas('food')
-    app.run(debug=True, host='0.0.0.0')
+    app.run(debug=True, threaded=True, host='0.0.0.0') # DEBUG: remove threaded=True from prod
     #print getRelatedIdeas('eeg scrolling')
     #printRelatedIdeas('eeg scrolling')
